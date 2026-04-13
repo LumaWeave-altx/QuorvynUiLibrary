@@ -1,7 +1,6 @@
 --!strict
--- Quorvyn UI Library
--- A compact Roblox UI library built for mobile + PC with:
--- loading screen, draggable window, minimize pill, and clean element API.
+-- Quorvyn UI Library v2.0
+-- A robust, modular, and mobile-optimized UI library for Roblox
 
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
@@ -28,7 +27,8 @@ export type WindowConfig = {
 type Callback<T> = (T) -> ()
 type Element = { Destroy: (Element) -> () }
 
-local function create(className: string, props: {[any]: any}?)
+--// Utility Functions
+local function create(className: string, props: {[any]: any}?): Instance
 	local inst = Instance.new(className)
 	if props then
 		for k, v in pairs(props) do
@@ -159,6 +159,7 @@ local function formatPlayerName()
 	return LocalPlayer.Name
 end
 
+--// Window Management
 function Quorvyn:CreateWindow(config: WindowConfig?)
 	config = config or {}
 	local self = setmetatable({}, Quorvyn)
@@ -480,6 +481,7 @@ function Quorvyn:CreateWindow(config: WindowConfig?)
 	create("UIPadding", {
 		PaddingLeft = UDim.new(0, 4),
 		PaddingRight = UDim.new(0, 4),
+		PaddingBottom = UDim.new(0, 4),
 		Parent = tabsBarPad,
 	})
 
@@ -1122,20 +1124,11 @@ function Quorvyn:CreateWindow(config: WindowConfig?)
 		if self._destroyed then return end
 		self._destroyed = true
 		for _, conn in ipairs(self._connections) do
-			pcall(function() conn:Disconnect() end)
+			conn:Disconnect()
 		end
 		if self.Gui then
 			self.Gui:Destroy()
 		end
-	end
-
-	if self.UnloadKey then
-		table.insert(self._connections, UserInputService.InputBegan:Connect(function(input, gameProcessed)
-			if gameProcessed then return end
-			if input.KeyCode == self.UnloadKey then
-				self:Destroy()
-			end
-		end))
 	end
 
 	return self
