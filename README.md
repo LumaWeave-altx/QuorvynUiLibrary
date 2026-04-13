@@ -45,4 +45,5 @@ Quorvyn UI Library is a clean, modern Roblox UI library made for both PC and mob
 If you are using a loadstring-enabled environment, host `QuorvynUI.lua` as a raw GitHub file and load it like this:
 
 ```lua
-local Quorvyn = loadstring(game:HttpGet("YOUR_RAW_GITHUB_URL_HERE"))()
+local Quorvyn = loadstring(game:HttpGet("https://raw.githubusercontent.com/LumaWeave-altx/QuorvynUiLibrary/main/QuorvynUI.lua"))()
+```
