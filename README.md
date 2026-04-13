@@ -50,11 +50,11 @@ local Quorvyn = loadstring(game:HttpGet("https://raw.githubusercontent.com/LumaW
 
 ## Example Script
 
-Here is a simple example script to get you started with Quorvyn UI Library:
+Here is a simple example script using loadstring to get you started with Quorvyn UI Library:
 
 ```lua
 -- Example.client.lua
-local Quorvyn = require(game:GetService("ReplicatedStorage"):WaitForChild("QuorvynUI"))
+local Quorvyn = loadstring(game:HttpGet("https://raw.githubusercontent.com/LumaWeave-altx/QuorvynUiLibrary/refs/heads/main/Source.lua"))()
 
 local window = Quorvyn:CreateWindow({
     Name = "Example UI",
